@@ -6,12 +6,12 @@ Given a user intent and the current repository state, generate a step-by-step ex
 Each step must be a single git command or a well-defined action.
 
 CRITICAL RULES:
-1. For commit commands, use bare "git commit" with -m flag. The system will auto-generate the message.
-2. For tag commands, use "git tag -a {tag_name} -m 'release {tag_name}'"
-3. Push branch: "git push {remote} {branch}"
-4. Push tag: "git push {remote} {tag_name}"
-5. NEVER include --dry-run in any git command
-6. For git add commands, use "git add *" (common case)
+1. For staging files, use "git add -A" or "git add .". NEVER use "git add *" (glob doesn't work in subprocess).
+2. For commit commands, use bare "git commit" without -m flag. The system will auto-generate the message.
+3. For tag commands, use "git tag -a {tag_name} -m 'release {tag_name}'"
+4. Push branch: "git push {remote} {branch}"
+5. Push tag: "git push {remote} {tag_name}"
+6. NEVER include --dry-run in any git command
 
 Risk levels:
 - LOW: read-only (status, diff, log, show, blame, AI analysis)

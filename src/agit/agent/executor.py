@@ -153,6 +153,7 @@ class AgentExecutor:
         """Fix common AI-generated command issues."""
         cmd = command.strip()
         cmd = re.sub(r'\s+--dry-run\b', '', cmd)
+        cmd = re.sub(r'(git\s+add)\s+\*', r'\1 -A', cmd)
         cmd = re.sub(r'\s+', ' ', cmd)
         return cmd
 
